@@ -8,8 +8,17 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/api', router)
-app.use('/cgi-bin', createProxyMiddleware({
+app.use(['/cgi-bin'], createProxyMiddleware({
   target: 'https://u.y.qq.com',
+  changeOrigin: true,
+  secure: false,
+  headers: {
+    origin: 'https://y.qq.com',
+    referer: 'https://y.qq.com/'
+  }
+}));
+app.use(['/qzone', '/splcloud', '/soso', '/lyric'], createProxyMiddleware({
+  target: 'https://c.y.qq.com',
   changeOrigin: true,
   secure: false,
   headers: {

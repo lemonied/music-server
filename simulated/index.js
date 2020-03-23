@@ -15,7 +15,7 @@ const path = require('path')
   const page = await browser.newPage()
   page.on('load', async () => {
     await page.evaluate(async () => {
-      const loginBtn = document.getElementsByClassName('top_login__link')[0];
+      const loginBtn = document.getElementsByClassName('top_login__link')[0]
       if (loginBtn) {
         loginBtn.click()
       }
